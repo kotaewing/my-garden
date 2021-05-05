@@ -114,6 +114,7 @@ function modalError(error) {
 // populates the modal with plant info
 function modalDisplayHandler(modalId, fetchData) {
     var ingredientListEl = $('#recipeIngredients')
+    $(ingredientListEl).empty();
 
     $('#modalHeader').text(fetchData.title)
     $('#modalImg').attr('src', fetchData.image)

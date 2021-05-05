@@ -5,3 +5,15 @@ main {
 #info {
     text-align: center;
 }
+
+#recipeIngredients {
+    list-style-type: square;
+}
+
+.recipeList::before {
+    content: ' - '
+}
+
+.modal {
+    height: fit-content;
+}

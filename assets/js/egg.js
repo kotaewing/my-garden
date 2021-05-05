@@ -74,12 +74,12 @@ getIngredientList()
 
 // Modal Info -----------------------------
 
-// add id from plantId to modal 
+// add id from recipeId to modal 
 function addModalId(id) {
     $('.modal').attr('id', id);
 }
 
-// makes the fetch to openfarm, passing in the plantId from click function
+// makes the fetch to spoonacular, passing in the recipeId from click function
 function modalInformationFetchHandler(recipeId) {
     var modalFetchUrl = "https://api.spoonacular.com/recipes/" + recipeId + "/information?includeNutrition=false&apiKey=1ce5503bf49b445b92a7267bc15d3d4f"
     fetch(modalFetchUrl)
@@ -111,19 +111,23 @@ function modalError(error) {
     $('#modalHeader').text('Something went wrong... ' + error)
 }
 
-// populates the modal with plant info
-function modalDisplayHandler(modalId, fetchData) {
+// populates the modal with recipe info
+function modalDisplayHandler(fetchData) {
+    // grab id of ul in modal
     var ingredientListEl = $('#recipeIngredients')
     $(ingredientListEl).empty();
 
+    // grabs header and image source from data
     $('#modalHeader').text(fetchData.title)
     $('#modalImg').attr('src', fetchData.image)
 
+    // creates list items for each ingredient
     for (var i = 0; i < fetchData.extendedIngredients.length; i++) {
         var listItem = $('<li>').text(fetchData.extendedIngredients[i].originalString).addClass('recipeList')
         $(ingredientListEl).append(listItem);
     }
 
+    // adds instructions for the recipe
     $('#recipeInstructions').text(fetchData.instructions)
 
 }
